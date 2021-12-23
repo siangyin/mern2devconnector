@@ -32,7 +32,7 @@ router.get("/me", auth, async (req, res) => {
 	}
 });
 
-// @route   POST api/profile/me
+// @route   POST api/profile
 // @desc    Create or Update user profile
 // @access  Private
 
@@ -46,6 +46,7 @@ router.post(
 		],
 	],
 	async (req, res) => {
+		
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
@@ -53,14 +54,14 @@ router.post(
 
 		// destructure the request
 		const {
-			website,
+			status,
 			skills,
+			website,
 			youtube,
 			twitter,
 			instagram,
 			linkedin,
 			facebook,
-			status,
 			// spread the rest of the fields we don't need to check
 			...rest
 		} = req.body;
