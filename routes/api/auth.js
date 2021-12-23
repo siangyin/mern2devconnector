@@ -14,10 +14,10 @@ const User = require("../../models/User");
 router.get("/", auth, async (req, res) => {
 	console.log(req.user.id);
 	try {
-		const userDB = await User.findOne({ _id: req.user.id }).select("-password");
-		console.log(userDB);
-		// console.log is working but json not showing
-		return res.status(200).json({ userDB });
+		const user = await User.findOne({ _id: req.user.id }).select("-password");
+		console.log(user);
+		// console.log is working but json not showing, due to the body option in postman set to raw. change to none then it's working.
+		return res.status(200).json({ user});
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send(`server error`);
